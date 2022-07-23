@@ -16,12 +16,13 @@ import CustomButton from "../../components/common/CustomButton/CustomButton";
 const Login = ({ navigation }) => {
   return (
     <AuthView>
-      <InputText title="Email" />
-      <InputText title="Password" />
+      <InputText style={styles.input}  title="Email" />
+      <InputText style={styles.input} title="Password" />
       <Text style={styles.forgotPassword}>Forgot Password?</Text>
       <View style={styles.buttonContainer}>
         <CustomButton
           title="LOG IN"
+          onPress={() => navigation.navigate("Profile")}
           textColor="white"
           style={styles.button}
           size="lg"
@@ -85,6 +86,19 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     marginHorizontal: 20,
   },
+  input: {
+       
+    marginTop: 10,
+    borderWidth: 1,
+    borderColor: '#ddd',
+    padding: 10,
+    fontSize: 18,
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    marginHorizontal: 20,
+    marginVertical: 10,
+
+}
 });
 
 export default Login;

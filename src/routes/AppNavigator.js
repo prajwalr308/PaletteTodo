@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text } from 'react-native'
 import React from 'react'
+import Profile from '../screens/Profile/Profile';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -15,6 +16,7 @@ const AppNavigator = () => {
   }}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Signup" component={Signup} />
+        <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
   )
