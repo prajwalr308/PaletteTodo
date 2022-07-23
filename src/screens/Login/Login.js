@@ -5,6 +5,8 @@ import {
   StyleSheet,
   TextInput,
   TextInputBase,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
 } from "react-native";
 import React from "react";
 
@@ -16,9 +18,12 @@ import CustomButton from "../../components/common/CustomButton/CustomButton";
 const Login = ({ navigation }) => {
   return (
     <AuthView>
-      <InputText style={styles.input}  title="Email" />
+      <InputText style={styles.input} title="Email" />
       <InputText style={styles.input} title="Password" />
-      <Text style={styles.forgotPassword}>Forgot Password?</Text>
+      <TouchableWithoutFeedback onPress={() => navigation.navigate("ForgotPassword")}>
+        <Text style={styles.forgotPassword}>Forgot Password?</Text>
+      </TouchableWithoutFeedback>
+
       <View style={styles.buttonContainer}>
         <CustomButton
           title="LOG IN"
@@ -31,7 +36,7 @@ const Login = ({ navigation }) => {
           bg="black"
         />
         <CustomButton
-        onPress={() => navigation.navigate("Signup")}
+          onPress={() => navigation.navigate("Signup")}
           title="NEW USER"
           textColor="black"
           style={styles.button}
@@ -87,18 +92,16 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
   },
   input: {
-       
     marginTop: 10,
     borderWidth: 1,
-    borderColor: '#ddd',
+    borderColor: "#ddd",
     padding: 10,
     fontSize: 18,
     borderRadius: 10,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     marginHorizontal: 20,
     marginVertical: 10,
-
-}
+  },
 });
 
 export default Login;

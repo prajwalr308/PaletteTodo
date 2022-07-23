@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
 import AuthView from "../../components/authView/AuthView";
 import InputText from "../../components/common/InputText/InputText";
@@ -34,7 +34,9 @@ const Signup = ({navigation}) => {
             variant="solid"
             bg="black"
           />
+          <TouchableHighlight onPress={() => navigation.navigate("Login")}>
           <Text style={styles.alreadyUser}>Already have an account?</Text>
+          </TouchableHighlight>
         </View>
       ) : (
         <View>
