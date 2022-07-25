@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import React from "react";
 
-import AuthView from "../../components/authView/AuthView";
+import AuthView from "../../components/AuthView/AuthView";
 import InputText from "../../components/common/InputText/InputText";
 import Button from "../../components/common/CustomButton/CustomButton";
 import CustomButton from "../../components/common/CustomButton/CustomButton";
@@ -27,7 +27,7 @@ const Login = ({ navigation }) => {
       <View style={styles.buttonContainer}>
         <CustomButton
           title="LOG IN"
-          onPress={() => navigation.navigate("Profile")}
+          onPress={() => navigation.push("Todo")}
           textColor="white"
           style={styles.button}
           size="lg"

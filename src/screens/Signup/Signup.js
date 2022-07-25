@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
 import React, { useState } from "react";
-import AuthView from "../../components/authView/AuthView";
+import AuthView from "../../components/AuthView/AuthView";
 import InputText from "../../components/common/InputText/InputText";
 import CustomButton from "../../components/common/CustomButton/CustomButton";
 import colors from "../../util/color";
