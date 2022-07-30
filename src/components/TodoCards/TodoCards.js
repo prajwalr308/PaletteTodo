@@ -7,7 +7,7 @@ import colors from '../../util/color'
 
 const TodoCards = ({navigation}) => {
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate('TodoDetail')}>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('TodoDetails')}>
     <View style={styles.container}>
         <View style={styles.textContainer}>
       <Text style={styles.text}>Jun 20, 2021  </Text>

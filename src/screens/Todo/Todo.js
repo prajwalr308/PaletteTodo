@@ -16,14 +16,9 @@ const Todo = ({navigation}) => {
     <View style={styles.container}>
     <TodoTopBar navigation={navigation} />
     <SelectionBar onSelectData={onSelectData} />
-    {selectId === 1 ?<AddTodo />:<ScrollView >
-    <TodoCards />
-    <TodoCards />
-    <TodoCards />
-    <TodoCards />
-    <TodoCards />
-    <TodoCards />
-    <TodoCards />
+    {selectId === 1 ?<AddTodo  />:<ScrollView >
+    {[0,1,2,3,4,5].map((item)=><TodoCards key={item} navigation={navigation} />)}
+    
 </ScrollView>}
     
     </View>

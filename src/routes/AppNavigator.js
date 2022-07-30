@@ -8,6 +8,7 @@ import React from 'react'
 import Profile from '../screens/Profile/Profile';
 import ForgotPassword from '../screens/forgotPassword/ForgotPassword';
 import Todo from '../screens/Todo/Todo';
+import TodoDetails from '../screens/TodoDetails/TodoDetails';
 
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
@@ -21,6 +22,7 @@ const AppNavigator = () => {
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
         <Stack.Screen name="Todo" component={Todo} />
+        <Stack.Screen name="TodoDetails" component={TodoDetails} />
       </Stack.Navigator>
     </NavigationContainer>
   )
