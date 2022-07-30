@@ -16,13 +16,32 @@ import {
   ZStack,
 } from "native-base";
 import { Feather, Octicons } from "@expo/vector-icons";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePicker, { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import DatePicker from "react-native-date-picker";
 import RNDateTimePicker from "@react-native-community/datetimepicker";
 const AddTodo = () => {
   let [service, setService] = React.useState("");
-  const [date, setDate] = useState(new Date());
-  const [open, setOpen] = useState(false);
+  const [date ,setDate] = useState(new Date())
+const [time, setTime] = useState(new Date())
+
+const onChange = (event, selectedDate) => {
+  const currentDate = selectedDate;
+  setDate(currentDate);
+  setTime(currentDate)
+};
+
+const showMode = (currentMode) => {
+  DateTimePickerAndroid.open({
+    value: currentMode === 'date' ? date: time,
+    onChange,
+    mode: currentMode,
+    is24Hour: true
+  })
+};
+  const handleDate =(mode)=>{
+    showMode(mode);
+  }
+
   return (
     <View>
       <View>
@@ -50,11 +69,11 @@ const AddTodo = () => {
             mt={1}
             onValueChange={(itemValue) => setService(itemValue)}
           >
-            <Select.Item label="UX Research" value="ux" />
-            <Select.Item label="Web Development" value="web" />
-            <Select.Item label="Cross Platform Development" value="cross" />
-            <Select.Item label="UI Designing" value="ui" />
-            <Select.Item label="Backend Development" value="backend" />
+            <Select.Item label="Opening" value="opening" />
+            <Select.Item label="Completed" value="completed" />
+            <Select.Item label="Ongoing" value="Ongoing" />
+            {/* <Select.Item label="UI Designing" value="ui" />
+            <Select.Item label="Backend Development" value="backend" /> */}
           </Select>
         </Box>
       </View>
@@ -68,7 +87,7 @@ const AddTodo = () => {
           placeholder="Outline"
         />
         <View style={styles.rowDirection}>
-          <TouchableWithoutFeedback onPress={() => setOpen(true)}>
+          <TouchableWithoutFeedback onPress={()=>handleDate('date')}>
             <ZStack
               style={{ flexDirection: "row", marginTop: 20, marginLeft: 30 }}
             >
@@ -77,13 +96,13 @@ const AddTodo = () => {
               </Center>
               <Feather
                 name="calendar"
-                style={{ marginLeft: 10 }}
+                style={{ marginLeft: 10,marginTop:10 }}
                 size={24}
                 color="black"
               />
             </ZStack>
           </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() => setOpen(true)}>
+          <TouchableWithoutFeedback onPress={()=>handleDate("time")}>
             <ZStack
               style={{ flexDirection: "row", marginTop: 20, marginLeft: 150 }}
             >
@@ -92,15 +111,15 @@ const AddTodo = () => {
               </Center>
               <Feather
                 name="clock"
-                style={{ marginLeft: 10 }}
+                style={{ marginLeft: 10 ,marginTop:10}}
                 size={24}
                 color="black"
               />
             </ZStack>
           </TouchableWithoutFeedback>
         </View>
-        {open && <RNDateTimePicker value={new Date()} />}
-        {/* {open&&<RNDateTimePicker value={new Date()} />} */}
+       {/* <RNDateTimePicker value={new Date()} /> */}
+        {/* {open&&<RNDateTimePicker onChange={onDateChangehandler}value={date} />} */}
       </View>
       <TextArea
         mt={45}

@@ -7,6 +7,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
+import colors from "../../util/color";
 
 
 const data = [
@@ -50,7 +51,7 @@ const [itemData, setItemData] = useState(data);
     onSelectData(temp,id);
   }
   return (
-    <View >
+    <View style={styles.mainConatiner}>
       <FlatList
         horizontal
         
@@ -67,9 +68,9 @@ const [itemData, setItemData] = useState(data);
               )}
               {item.icon && (
                 <TouchableWithoutFeedback onPress={()=>onSelectHandler(item.id)}>
-                  <View>
+                  <View style={item.isSelected&&styles.selectedIcon}>
                    
-                    <Ionicons name={item.icon} size={34} color={item.isSelected?"orange":"black"} />
+                    <Ionicons name={item.icon} size={item.isSelected?30: 28} color={item.isSelected?colors.pinkColor:"black"} />
                   </View>
                 </TouchableWithoutFeedback>
               )}
@@ -82,20 +83,32 @@ const [itemData, setItemData] = useState(data);
 };
 
 const styles = StyleSheet.create({
+  mainConatiner: {
+    marginLeft: 25,
+  },
   container: {
     marginRight: 30,
+    
     overflow:'hidden'
   },
   Text: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
     marginBottom: 30,
+    color: colors.textGray,
   },
   selectedText: {
     fontSize: 22,
     fontWeight: "bold",
     marginBottom: 30,
-    color: "orange",
+    color: colors.pinkColor,
+    borderBottomColor: colors.pinkColor,
+    borderBottomWidth: 2,
   },
+  selectedIcon:{
+    color: colors.pinkColor,
+    borderBottomColor: colors.pinkColor,
+    borderBottomWidth: 2,
+  }
 });
 export default SelectionBar;

@@ -5,7 +5,7 @@ import SelectionBar from '../../components/SelectionBar/SelectionBar'
 import TodoCards from '../../components/TodoCards/TodoCards'
 import AddTodo from '../../components/AddTodo/AddTodo'
 
-const Todo = () => {
+const Todo = ({navigation}) => {
   const [selects, setselects] = useState()
   const [selectId, setSelectId] = useState()
   const onSelectData = (data,id) => {
@@ -14,7 +14,7 @@ const Todo = () => {
   }
   return (
     <View style={styles.container}>
-    <TodoTopBar />
+    <TodoTopBar navigation={navigation} />
     <SelectionBar onSelectData={onSelectData} />
     {selectId === 1 ?<AddTodo />:<ScrollView >
     <TodoCards />
