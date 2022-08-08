@@ -19,6 +19,7 @@ import EditableCards from "../../components/common/EditableCards/EditableCards";
 import TodoDescription from "../../components/TodoDescription/TodoDescription";
 import TodoResources from "../../components/TodoResources/TodoResources";
 import TodoLinks from "../../components/TodoLinks/TodoLinks";
+import colors from "../../util/color";
 const TodoDetails = ({ navigation }) => {
   return (
     <View style={styles.container}>
@@ -38,7 +39,7 @@ const TodoDetails = ({ navigation }) => {
           <Text style={styles.title}>Apply to Montogemry College</Text>
           <View style={styles.secondaryContainer}>
             <View style={styles.subField}>
-              <MaterialCommunityIcons name="pencil" size={24} color="black" />
+              <MaterialCommunityIcons name="pencil" size={20} color="black" />
               <View>
                 <Text style={styles.subtitle}>Listed By</Text>
                 <Text style={styles.subtitle}>You,at 6:00pm,May 05 2021</Text>
@@ -47,7 +48,7 @@ const TodoDetails = ({ navigation }) => {
             <View style={styles.statusContainer}>
               <CustomButton
                 title="REMOVED"
-                onPress={() => navigation.push("Todo")}
+              
                 textColor="white"
                 style={styles.button}
                 size="lg"
@@ -60,7 +61,7 @@ const TodoDetails = ({ navigation }) => {
               <View style={styles.statusTextFields}>
                 <Text style={styles.statusSubtitle}>Completed By</Text>
                 <Text style={styles.statusSubtitle}>
-                  You,at 6:00pm,May 05 2021
+                 6:00pm,May 05 2021
                 </Text>
               </View>
             </View>
@@ -83,10 +84,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
   },
   secondaryContainer: {
-    marginLeft: 20,
+    marginLeft: 30,
   },
   subField: {
     flexDirection: "row",
+  },
+  subtitle: {
+    fontSize: 12,
+    fontWeight: "bold",
+    color: colors.textGray,
+    
   },
   statusContainer: {
     flexDirection: "row",
@@ -95,9 +102,11 @@ const styles = StyleSheet.create({
   statusTextFields: {
     marginLeft: 20,
   },
+
   statusSubtitle: {
     fontSize: 14,
     fontWeight: "bold",
+    color:colors.textGray
   },
   descriptionContainer: {},
 
@@ -111,8 +120,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     marginTop: 30,
-    marginLeft: 20,
+    marginLeft: 30,
     width: "80%",
+    color: colors.textBlack,
   },
 });
 

@@ -1,12 +1,30 @@
 import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AuthView from "../../components/AuthView/AuthView";
 import InputText from "../../components/common/InputText/InputText";
 import CustomButton from "../../components/common/CustomButton/CustomButton";
 import colors from "../../util/color";
+import { register } from "../../services/Api/authServices";
+import { currUser } from "../../Context/Context";
+
+
 
 const Signup = ({navigation}) => {
+  const {user,setUser} = useContext(currUser);
   const [isNext, setisNext] = useState(false);
+  const [error, setError] = useState(false);
+  const [userObj,setUserObj] = useState({email: "",password: ""});
+  const [tempPassword,setTempPassword] = useState("");
+  const registerHandler=async()=>{
+     const userdata=await register(navigation,userObj);
+      console.log("********data**********",userdata)
+      setUser(userdata);
+    }
+  const onChangeTextHandler = (text,field) => {
+    if(field=="password"){
+      tempPassword===text?setUserObj({...userObj, password: text}):setError(true);
+    }else{setUserObj({ ...userObj, [field]: text });}
+  }
   return (
     <AuthView>
       <View style={styles.textContainer}>
@@ -20,12 +38,12 @@ const Signup = ({navigation}) => {
       {isNext ? (
         <View>
           <View style={styles.inputContainer}>
-            <InputText style={styles.input} title="Enter Password" />
-            <InputText style={styles.input} title="Confirm Password" />
+            <InputText style={styles.input} title="Enter Password" onChangeText={(text)=>setTempPassword(text)}/>
+            <InputText style={styles.input} title="Confirm Password" onChangeText={(text)=>onChangeTextHandler(text,"password")} />
           </View>
           <CustomButton
             title="Register"
-            onPress={() => navigation.navigate("Profile")}
+            onPress={() => registerHandler()}
             textColor="white"
             style={styles.button}
             size="lg"
@@ -40,7 +58,7 @@ const Signup = ({navigation}) => {
         </View>
       ) : (
         <View>
-          <InputText style={styles.inputEmail} title="Enter Email address" />
+          <InputText style={styles.inputEmail} title="Enter Email address"  onChangeText={(text)=>onChangeTextHandler(text,"email")}/>
 
           <CustomButton
             title="Continue"

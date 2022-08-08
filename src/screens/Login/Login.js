@@ -8,26 +8,38 @@ import {
   TouchableHighlight,
   TouchableWithoutFeedback,
 } from "react-native";
-import React from "react";
+import React, { useContext, useState } from "react";
 
 import AuthView from "../../components/AuthView/AuthView";
 import InputText from "../../components/common/InputText/InputText";
 import Button from "../../components/common/CustomButton/CustomButton";
 import CustomButton from "../../components/common/CustomButton/CustomButton";
+import { login } from "../../services/Api/authServices";
+import { currUser } from "../../Context/Context";
+
 
 const Login = ({ navigation }) => {
+  const { user, setUser } =useContext(currUser);
+  const[userObj,setUserObj] = useState({email: "",password: ""});
+  const loginHandler = async() => {
+     const userdata =await login(navigation,userObj);
+     console.log("********data**********",userdata)
+      setUser(userdata);
+  }
   return (
     <AuthView>
-      <InputText style={styles.input} title="Email" />
-      <InputText style={styles.input} title="Password" />
+      <InputText style={styles.input} title="Email" onChangeText={(text)=>setUserObj({...userObj,email:text})} />
+      <InputText style={styles.input} title="Password" onChangeText={(text)=>setUserObj({...userObj,password:text})} secureTextEntry={true}/>
+      
       <TouchableWithoutFeedback onPress={() => navigation.navigate("ForgotPassword")}>
+
         <Text style={styles.forgotPassword}>Forgot Password?</Text>
       </TouchableWithoutFeedback>
 
       <View style={styles.buttonContainer}>
         <CustomButton
           title="LOG IN"
-          onPress={() => navigation.push("Todo")}
+          onPress={loginHandler}
           textColor="white"
           style={styles.button}
           size="lg"
@@ -59,7 +71,8 @@ const styles = StyleSheet.create({
   forgotPassword: {
     color: "#000",
 
-    textAlign: "right",
+    width: 150,
+    alignSelf: "flex-end",
     marginRight: 20,
     marginTop: 10,
     fontSize: 18,

@@ -4,7 +4,7 @@ import Signup from '../screens/Signup/Signup';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text } from 'react-native'
-import React from 'react'
+import React, { createRef } from 'react'
 import Profile from '../screens/Profile/Profile';
 import ForgotPassword from '../screens/forgotPassword/ForgotPassword';
 import Todo from '../screens/Todo/Todo';
@@ -13,7 +13,7 @@ import TodoDetails from '../screens/TodoDetails/TodoDetails';
 const Stack = createNativeStackNavigator();
 const AppNavigator = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={createRef()}>
       <Stack.Navigator  screenOptions={{
     headerShown: false
   }}>

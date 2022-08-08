@@ -4,7 +4,8 @@ import { Icon, Input } from "native-base";
 import CustomAvatar from "../common/CustomAvatar/CustomAvatar";
 import { EvilIcons } from "@expo/vector-icons";
 import colors from "../../util/color";
-const PersonalInfo = ({ isEdit }) => {
+const PersonalInfo = (props) => {
+  console.log("********props**********", props.userDetails?.userFound.email);
   return (
     <View style={styles.container}>
       <View style={styles.avatar}>
@@ -13,7 +14,7 @@ const PersonalInfo = ({ isEdit }) => {
       }} />
       </View>
       <View style={styles.inputContainer}>
-        {isEdit ? (
+        {props.isEdit ? (
           <View style={styles.inputs}>
             <Input
               ml={4}
@@ -28,7 +29,7 @@ const PersonalInfo = ({ isEdit }) => {
           </View>
         ) : (
           <View style={styles.textFields}>
-            <Text style={styles.name}>John Doe</Text>
+            <Text style={styles.name}>{props.userDetails?.userFound.email}</Text>
             <View style={styles.secondaryFields}>
               <Text style={styles.age}> 25yrs </Text>
               <Text style={styles.gender}> male </Text>
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
   },
   name: {
-    fontSize: 30,
+    fontSize: 20,
     fontWeight: "bold",
     marginLeft: 10,
     marginTop: 10,

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import CustomAvatar from "../../components/common/CustomAvatar/CustomAvatar";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";
 import PersonalInfo from "../../components/PersonalInfo/PersonalInfo";
@@ -7,12 +7,15 @@ import PersonalInfo from "../../components/PersonalInfo/PersonalInfo";
 import { Button } from "native-base";
 import CustomButton from "../../components/common/CustomButton/CustomButton";
 import EducationAndWork from "../../components/EducationAndWork/EducationAndWork";
+import { currUser } from "../../Context/Context";
+
 
 const Profile = ({ navigation }) => {
+  const { user } = useContext(currUser);
   return (
     <View style={styles.container}>
-      <ProfileHeader navigation={navigation} title="my profile" />
-      <PersonalInfo isEdit={false} />
+      <ProfileHeader navigation={navigation}  title="my profile" />
+      <PersonalInfo isEdit={false} userDetails={user} />
       <CustomButton
         title="Edit Profile"
         textColor="black"
