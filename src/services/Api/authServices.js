@@ -18,7 +18,7 @@ export const login = async (navigation,userObj) => {
    
     try {
      let user= await axios.post(`${API_URL}/user/register` ,userObj)
-      navigation.navigate("Todo")
+      navigation.navigate("Login")
       return user.data
     } catch (e) {
       console.log(e)

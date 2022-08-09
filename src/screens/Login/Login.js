@@ -7,6 +7,7 @@ import {
   TextInputBase,
   TouchableHighlight,
   TouchableWithoutFeedback,
+ 
 } from "react-native";
 import React, { useContext, useState } from "react";
 
@@ -16,14 +17,26 @@ import Button from "../../components/common/CustomButton/CustomButton";
 import CustomButton from "../../components/common/CustomButton/CustomButton";
 import { login } from "../../services/Api/authServices";
 import { currUser } from "../../Context/Context";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Spinner } from "native-base";
 
 const Login = ({ navigation }) => {
   const { user, setUser } =useContext(currUser);
   const[userObj,setUserObj] = useState({email: "",password: ""});
+  const[loading,setLoading] = useState(false);
   const loginHandler = async() => {
+    try {
+      setLoading(true);
+      const user = await login(navigation,userObj);
+      await AsyncStorage.setItem('token_Key', user.token)
+      
+      setUser(user);
+    } catch (e) { 
+      console.log(e)
+      setLoading(false);
+    }
      const userdata =await login(navigation,userObj);
-     console.log("********data**********",userdata)
+  
       setUser(userdata);
   }
   return (
@@ -37,7 +50,7 @@ const Login = ({ navigation }) => {
       </TouchableWithoutFeedback>
 
       <View style={styles.buttonContainer}>
-        <CustomButton
+       {!loading? <CustomButton
           title="LOG IN"
           onPress={loginHandler}
           textColor="white"
@@ -46,7 +59,7 @@ const Login = ({ navigation }) => {
           py={4}
           variant="solid"
           bg="black"
-        />
+        />:<Spinner color="secondary.500" />}
         <CustomButton
           onPress={() => navigation.navigate("Signup")}
           title="NEW USER"

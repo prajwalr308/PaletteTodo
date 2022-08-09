@@ -5,7 +5,7 @@ import { Center } from 'native-base'
 import { FontAwesome, Ionicons } from '@expo/vector-icons'
 import colors from '../../util/color'
 
-const TodoCards = ({navigation}) => {
+const TodoCards = ({navigation,details}) => {
   return (
     <TouchableWithoutFeedback onPress={() => navigation.navigate('TodoDetails')}>
     <View style={styles.container}>
@@ -21,7 +21,7 @@ const TodoCards = ({navigation}) => {
             <Center h="55" w="1" bg="indigo.500" rounded="md" shadow={3} />
             </View>
             <View style={styles.rightContainer}>
-                <Text style={styles.title}>Apply to Montogomery College</Text>
+                <Text style={styles.title}>{details.title}</Text>
                 <View style={styles.rightSubContainer}>
                 <View style={styles.iconContainer}>
                 <FontAwesome name="file" style={styles.icon} size={16} color="black" />
@@ -37,6 +37,7 @@ const TodoCards = ({navigation}) => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: "row",
+        width: "100%",
        
     },
     avatarContainer: {
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
     rightContainer:{
         marginTop: 10,
         marginLeft: 10,
+        width: 250,
 
     },
     rightSubContainer: {
