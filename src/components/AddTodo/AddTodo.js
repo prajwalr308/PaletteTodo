@@ -30,6 +30,7 @@ import { createApi, getApi } from "../../services/Api/requests";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AlertDialogBox from "../common/AlertDialogBox/AlertDialogBox";
+import CustomAvatar from "../common/CustomAvatar/CustomAvatar";
 const AddTodo = () => {
   let [service, setService] = React.useState("");
   const navigation = useNavigation();
@@ -124,10 +125,12 @@ const AddTodo = () => {
               <Center h="42" w="40" bg="white" rounded="full" shadow={3}>
                 Assignee
               </Center>
-              <Center h="10" w="10" bg="white" rounded="full" shadow={3}>
+            { createDetails.assignees=="" ?<Center h="10" w="10" bg="white" rounded="full" shadow={3}>
                 <Octicons name="person-add" size={24} color="black" />
-              </Center>
-            </ZStack>
+              </Center>:<Center h="10" w="10" bg="white" rounded="full" shadow={3}><CustomAvatar  bg="indigo.500" alignSelf="center" size="sm" source={{
+        uri: "https://images.unsplash.com/photo-1614289371518-722f2615943d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"}}/>
+            
+            </Center>}</ZStack>
           </TouchableWithoutFeedback>
           <Actionsheet isOpen={show} onClose={() => setShow(false)}>
             <Actionsheet.Content>

@@ -2,16 +2,17 @@ import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { ZStack } from 'native-base'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons'
+import colors from '../../util/color'
 
 const ProfileHeader = ({title,navigation}) => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={()=> navigation.popToTop()}>
-      <Ionicons name="chevron-back-outline" size={24} color="black" />
+      <Ionicons name="chevron-back-outline" size={28} color="black" />
       </TouchableWithoutFeedback>
-      <Text>{title}</Text>
+      <Text style={styles.header}>{title}</Text>
       <TouchableWithoutFeedback onPress={()=> navigation.navigate("Login")}>
-      <MaterialIcons name="logout" size={24} color="black" />
+      <MaterialIcons  name="logout" size={28} color={colors.pinkColor} />
       </TouchableWithoutFeedback>
       
     </View>
@@ -34,6 +35,13 @@ const styles = StyleSheet.create({
         elevation: 1,
        
         
-    }
+    },
+    header: {
+
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: colors.textBlack,
+    },
+
 })
 export default ProfileHeader

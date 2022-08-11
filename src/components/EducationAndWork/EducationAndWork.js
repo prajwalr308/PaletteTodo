@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, ScrollView } from "react-native";
 import React from "react";
 import EditableCards from "../common/EditableCards/EditableCards";
 import colors from "../../util/color";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 
 const EducationAndWork = () => {
   const nameThearray = [
@@ -11,7 +11,7 @@ const EducationAndWork = () => {
       title: "Education",
       height: "100",
       width: "180",
-      icon:"school-outline",
+      icon: "school-outline",
       render: () => {
         return (
           <View>
@@ -27,7 +27,7 @@ const EducationAndWork = () => {
       title: "WorkExperience",
       height: "100",
       width: "180",
-      icon:"briefcase-outline",
+      icon: "briefcase-outline",
       render: () => {
         return (
           <View>
@@ -43,7 +43,7 @@ const EducationAndWork = () => {
       title: "Interests",
       height: "60",
       width: "180",
-      icon:"heart-outline",
+      icon: "heart-outline",
       render: () => {
         return (
           <View>
@@ -57,11 +57,11 @@ const EducationAndWork = () => {
       title: "",
       height: "30",
       width: "30",
-      icon:"",
+      icon: "",
       render: () => {
         return (
-          <View>
-            <Ionicons name="add-circle-outline" size={24} color="black" />
+          <View style={styles.social}>
+           <AntDesign name="mail" size={24} color="black" />
           </View>
         );
       },
@@ -73,53 +73,31 @@ const EducationAndWork = () => {
       {nameThearray.map((item) => {
         return (
           <View key={item.id}>
-           <View style={styles.titleContainer}>
+            <View style={styles.titleContainer}>
               <Ionicons name={item.icon} size={24} color="black" />
               <Text style={styles.text}>{item.title}</Text>
             </View>
             {/* <ScrollView horizontal style={styles.scrollContianer} > */}
-              <View style={styles.educationContainer}>
+            <View style={styles.educationContainer}>
               <EditableCards h={item.height} w={item.width} ml={5}>
                 {item.render()}
-                {/* <Text style={styles.title}>Dallas Institute</Text>
-          <Text style={styles.subText}>Computer Science</Text>
-          <Text style={styles.subText}>Grade 2,DLI40123</Text> */}
               </EditableCards>
               <EditableCards h={item.height} w={90} ml={5}>
                 <Ionicons name="add-circle-outline" size={24} color="black" />
               </EditableCards>
-           
-              </View>
+            </View>
             {/* </ScrollView > */}
           </View>
         );
       })}
-
-      
-    
-      {/* <View style={styles.titleContainer}>
-        <Ionicons name="school-outline" size={24} color="black" />
-        <Text style={styles.text}>Work Experience</Text>
-      </View>
-      <View style={styles.educationContainer}>
-        <EditableCards h={100} w={180} ml={5}>
-          <Text style={styles.title}>TCS - Full Time</Text>
-          <Text style={styles.subText}>Backend Engineer</Text>
-          <Text style={styles.subText}>Jan, 2019 - May, 2020</Text>
-        </EditableCards>
-        <EditableCards h={100} w={90} ml={5}>
-          <Ionicons name="add-circle-outline" size={24} color="black" />
-        </EditableCards>
-      </View> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
-    marginVertical: 20,
+    marginVertical: 10,
     marginLeft: 20,
     backgroundColor: "#fff",
   },
@@ -133,9 +111,7 @@ const styles = StyleSheet.create({
     color: colors.textGray,
   },
   educationContainer: {
-   
     flexDirection: "row",
-   
   },
   text: {
     fontSize: 14,
@@ -148,6 +124,7 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 20,
   },
+ 
 });
 
 export default EducationAndWork;
