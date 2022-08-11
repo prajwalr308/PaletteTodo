@@ -23,19 +23,15 @@ const data = [
   },
   {
     id: 3,
-    title: "Open",
+    title: "Global",
     isSelected: false,
   },
   {
     id: 4,
-    title: "Completed",
+    title: "Discrete",
     isSelected: false,
   },
-  {
-    id: 5,
-    title: "Closed",
-    isSelected: false,
-  },
+ 
   
 ];
 const SelectionBar = ({onSelectData}) => {

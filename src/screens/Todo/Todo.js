@@ -11,7 +11,7 @@ import { Spinner } from "native-base";
 
 const Todo = ({ navigation }) => {
   const [selects, setselects] = useState();
-  const [selectId, setSelectId] = useState();
+  const [selectId, setSelectId] = useState(2);
   const [todos, setTodos] = useState([]);
   const[ loading , setLoading] = useState(true);
   const { user } = useContext(currUser);
@@ -20,8 +20,10 @@ const Todo = ({ navigation }) => {
     setSelectId(id);
   };
   useEffect(() => {
+    if(selectId==2){
     (async () => {
       try {
+        setLoading(true);
         const token = await AsyncStorage.getItem("token_Key");
         
         const todoData = await getApi(navigation, "/todo", token);
@@ -32,8 +34,49 @@ const Todo = ({ navigation }) => {
         console.log(error);
         
       }
+    
     })();
-  }, []);
+    }
+    if(selectId==3){
+      (async () => {
+        try {
+          setLoading(true);
+          const token = await AsyncStorage.getItem("token_Key");
+          
+          const todoData = await getApi(navigation, "/todo", token);
+          const filteredGlobal = todoData.allToDos.filter(
+            (todo) => todo.type === "Global");
+          setLoading(false);
+          console.log(todoData, "todoDat");
+          setTodos(filteredGlobal);
+        } catch (error) {
+          console.log(error);
+          
+        }
+      
+      })();
+    }
+    if(selectId==4){
+      (async () => {
+        try {
+          setLoading(true);
+          const token = await AsyncStorage.getItem("token_Key");
+          
+          const todoData = await getApi(navigation, "/todo", token);
+          const filteredDiscrete = todoData.allToDos.filter(
+            (todo) => todo.type === "Discrete");
+          setLoading(false);
+          console.log(todoData, "todoDat");
+          setTodos(filteredDiscrete);
+        } catch (error) {
+          console.log(error);
+          
+        }
+      
+      })();
+    }
+ 
+  }, [selectId]);
 
   return (
     <View style={styles.container}>

@@ -3,7 +3,7 @@ import React from 'react'
 import { Fontisto } from '@expo/vector-icons'
 import colors from '../../util/color'
 
-const TodoLinks = () => {
+const TodoLinks = ({link}) => {
   return (
     <View >
 
@@ -15,9 +15,8 @@ const TodoLinks = () => {
   <View></View>
   </View>
   <View style={styles.links}>
-    <Text>https://docs.nativebase.io/ </Text>
-    <Text>https://docs.nativebase.io/ </Text>
-    <Text>https://docs.nativebase.io/ </Text>
+    <Text>{link} </Text>
+    
     </View>
   </View>
   )

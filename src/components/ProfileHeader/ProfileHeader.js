@@ -10,7 +10,9 @@ const ProfileHeader = ({title,navigation}) => {
       <Ionicons name="chevron-back-outline" size={24} color="black" />
       </TouchableWithoutFeedback>
       <Text>{title}</Text>
+      <TouchableWithoutFeedback onPress={()=> navigation.navigate("Login")}>
       <MaterialIcons name="logout" size={24} color="black" />
+      </TouchableWithoutFeedback>
       
     </View>
   )

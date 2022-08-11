@@ -25,3 +25,14 @@ export const login = async (navigation,userObj) => {
       
     }
   }
+  export const logout= async (navigation) => {
+   
+    try {
+     
+      navigation.navigate("Login")
+      
+    } catch (e) {
+      console.log(e)
+      
+    }
+  }

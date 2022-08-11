@@ -7,7 +7,7 @@ export const createApi = async (navigation,endpoint,token ,createDetails) => {
     };
   try {
     console.log(createDetails, "api");
-    const res=await axios.post(`${API_URL}${endpoint}`,config ,createDetails);
+    const res=await axios.post(`${API_URL}${endpoint}`,createDetails,config);
     console.log("success",res);
     navigation.navigate("Todo");
   } catch (e) {

@@ -7,7 +7,6 @@ import {
   TextInputBase,
   TouchableHighlight,
   TouchableWithoutFeedback,
- 
 } from "react-native";
 import React, { useContext, useState } from "react";
 
@@ -17,49 +16,72 @@ import Button from "../../components/common/CustomButton/CustomButton";
 import CustomButton from "../../components/common/CustomButton/CustomButton";
 import { login } from "../../services/Api/authServices";
 import { currUser } from "../../Context/Context";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Spinner } from "native-base";
+import AlertDialogBox from "../../components/common/AlertDialogBox/AlertDialogBox";
 
 const Login = ({ navigation }) => {
-  const { user, setUser } =useContext(currUser);
-  const[userObj,setUserObj] = useState({email: "",password: ""});
-  const[loading,setLoading] = useState(false);
-  const loginHandler = async() => {
+  const { user, setUser } = useContext(currUser);
+  const [userObj, setUserObj] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const loginHandler = async () => {
     try {
       setLoading(true);
-      const user = await login(navigation,userObj);
-      await AsyncStorage.setItem('token_Key', user.token)
-      
+      const user = await login(navigation, userObj);
+      await AsyncStorage.setItem("token_Key", user.token);
+
       setUser(user);
-    } catch (e) { 
-      console.log(e)
+      setLoading(false);
+      setUserObj({ email: "", password: "" });
+    } catch (e) {
+      console.log(e);
+      setIsOpen(true);
+      setError("enter correct email and password");
       setLoading(false);
     }
-     const userdata =await login(navigation,userObj);
-  
-      setUser(userdata);
-  }
+    const userdata = await login(navigation, userObj);
+
+    setUser(userdata);
+  };
   return (
     <AuthView>
-      <InputText style={styles.input} title="Email" onChangeText={(text)=>setUserObj({...userObj,email:text})} />
-      <InputText style={styles.input} title="Password" onChangeText={(text)=>setUserObj({...userObj,password:text})} secureTextEntry={true}/>
-      
-      <TouchableWithoutFeedback onPress={() => navigation.navigate("ForgotPassword")}>
+      <InputText
+        style={styles.input}
+        title="Email"
+        value={userObj.email}
+        onChangeText={(text) => setUserObj({ ...userObj, email: text })}
+      />
+      <InputText
+        style={styles.input}
+        title="Password"
+        value={userObj.password}
+        onChangeText={(text) => setUserObj({ ...userObj, password: text })}
+        secureTextEntry={true}
+      />
 
+      <TouchableWithoutFeedback
+        onPress={() => navigation.navigate("ForgotPassword")}
+      >
         <Text style={styles.forgotPassword}>Forgot Password?</Text>
       </TouchableWithoutFeedback>
 
       <View style={styles.buttonContainer}>
-       {!loading? <CustomButton
-          title="LOG IN"
-          onPress={loginHandler}
-          textColor="white"
-          style={styles.button}
-          size="lg"
-          py={4}
-          variant="solid"
-          bg="black"
-        />:<Spinner color="secondary.500" />}
+        {!loading ? (
+          <CustomButton
+            title="LOG IN"
+            onPress={loginHandler}
+            textColor="white"
+            style={styles.button}
+            size="lg"
+            py={4}
+            variant="solid"
+            bg="black"
+          />
+        ) : (
+          <Spinner color="secondary.500" />
+        )}
         <CustomButton
           onPress={() => navigation.navigate("Signup")}
           title="NEW USER"
@@ -74,6 +96,11 @@ const Login = ({ navigation }) => {
           variant="outline"
         />
       </View>
+      <AlertDialogBox
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          title={error}
+        />
     </AuthView>
   );
 };

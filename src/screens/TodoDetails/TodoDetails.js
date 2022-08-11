@@ -20,7 +20,9 @@ import TodoDescription from "../../components/TodoDescription/TodoDescription";
 import TodoResources from "../../components/TodoResources/TodoResources";
 import TodoLinks from "../../components/TodoLinks/TodoLinks";
 import colors from "../../util/color";
-const TodoDetails = ({ navigation }) => {
+const TodoDetails = ({ navigation,route }) => {
+  const details = route.params;
+  console.log(details,"details");
   return (
     <View style={styles.container}>
       <ZStack>
@@ -36,7 +38,7 @@ const TodoDetails = ({ navigation }) => {
               <Ionicons name="chevron-back-outline" size={46} color="black" />
             </TouchableWithoutFeedback>
           </View>
-          <Text style={styles.title}>Apply to Montogemry College</Text>
+          <Text style={styles.title}>{details.title}</Text>
           <View style={styles.secondaryContainer}>
             <View style={styles.subField}>
               <MaterialCommunityIcons name="pencil" size={20} color="black" />
@@ -66,12 +68,12 @@ const TodoDetails = ({ navigation }) => {
               </View>
             </View>
             {/* description */}
-            <TodoDescription />
+            <TodoDescription description={details.description} />
             {/* resources */}
             <TodoResources />
 
             {/* links */}
-            <TodoLinks />
+            <TodoLinks link={details.resource} />
           </View>
         </View>
       </ZStack>

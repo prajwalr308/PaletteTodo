@@ -7,7 +7,7 @@ import colors from '../../util/color'
 
 const TodoCards = ({navigation,details}) => {
   return (
-    <TouchableWithoutFeedback onPress={() => navigation.navigate('TodoDetails')}>
+    <TouchableWithoutFeedback onPress={() => navigation.navigate('TodoDetails',details)}>
     <View style={styles.container}>
         <View style={styles.textContainer}>
       <Text style={styles.text}>Jun 20, 2021  </Text>
@@ -27,7 +27,7 @@ const TodoCards = ({navigation,details}) => {
                 <FontAwesome name="file" style={styles.icon} size={16} color="black" />
                 <Ionicons name="link" style={styles.icon} size={16} color="black" />
                 </View>
-                <Text style={styles.status}>Open</Text>
+                <Text style={styles.status}>{details.type}</Text>
                 </View>
             </View>
     </View>
